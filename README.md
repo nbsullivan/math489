@@ -1,2 +1,3 @@
 # math489
-the trails and tribulations of math 489: applied linear algebra
+
+a collection of mathlab scripts and latex documents relating to MATH 489A/B Applied linear algebra
