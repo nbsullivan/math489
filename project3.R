@@ -24,11 +24,19 @@ orginal_df$transform <- "orginal"
 
 #q1
 q1 <- A %*% pointorginal
+q1a2 <- A %^% 2 %*% pointorginal
+q1a3 <- A %^% 3 %*% pointorginal
+
 
 q1p_df <- data.frame(t(q1))
-q1p_df$transform <- "A"
+q1a2_df <- data.frame(t(q1a2))
+q1a3_df <- data.frame(t(q1a3))
 
-q1_df <- rbind(orginal_df, q1p_df)
+q1p_df$transform <- "A"
+q1a2_df$transform <- "A^2"
+q1a3_df$transform <- "A^3"
+
+q1_df <- rbind(orginal_df, q1p_df, q1a3_df, q1a2_df)
 
 ggplot(data = q1_df, aes(x = X1, y = X2, color = transform)) +
   geom_hline(aes(yintercept = 0)) +
