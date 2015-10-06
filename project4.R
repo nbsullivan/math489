@@ -16,10 +16,10 @@ matrix.rotate <- function(x0, matrot, point){
   lst <- c(x0)
   
   # set up x current with the intial conditions
-  x.current <- x0
+  x.current <- t(x0)
   
   for(i in 1:point){
-    x.new <- x.current %*% matrot
+    x.new <-  matrot %*% x.current
     lst <- c(lst, x.new)
     x.current <- x.new
   }
@@ -52,18 +52,21 @@ ggplot(data = A10_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 1_First 10 Points")
 
 ggplot(data = A20_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 1_First 20 Points")
 
 ggplot(data = A100_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 1_First 100 points")
 
 # q2 now use B = ((1,-.1),(.1,.99))
@@ -85,6 +88,7 @@ ggplot(data = B100_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 2")
 
 # q3 compute the Vr Vi of one of the eigen vectors of B let
@@ -109,6 +113,7 @@ ggplot(data = q2q3_df, aes(x = X1, y = X2, color = transform)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 3")
 
 # q4 Dianonalize A and B are the Vr Vi of an complex eigen
@@ -125,12 +130,14 @@ ggplot(data = q2q3_df, aes(x = X1, y = X2, color = transform)) +
 # I can not come up one:-(
 ##################################
 
-M = matrix(c(), nrow = 2, ncol = 2)
-
+M = matrix(c(cos(5*pi/180), sin(5*pi/180), -sin(5*pi/180), cos(5*pi/180)), nrow = 2, ncol = 2)
+V = matrix(c(1, 0, 0, 3), nrow = 2, ncol = 2)
 
 x0 = matrix(c(1,0), nrow = 1, ncol = 2)
 
 q5.100 <- matrix.rotate(x0, M, 100)
+
+q5.100 <- V%*%q5.100
 
 M100_df <- data.frame(t(q5.100))
 
@@ -138,6 +145,7 @@ ggplot(data = M100_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) + 
   ggtitle("Question 5_Long Narrow Ellipse")
 
 
@@ -164,6 +172,7 @@ ggplot(data = A100000_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 7_First 100000 Points_Every 314th")
 
 
@@ -185,6 +194,7 @@ ggplot(data = Aplus200_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 8_First 200 Points_1.01A")
 
 
@@ -201,6 +211,7 @@ ggplot(data = Apluss200_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 8_First 200 Points_0.99A")
 
 #B+ = 1.01 B
@@ -216,6 +227,7 @@ ggplot(data = Bplus200_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 8_First 200 Points_1.01B")
 
 
@@ -232,4 +244,5 @@ ggplot(data = Bpluss200_df, aes(x = X1, y = X2)) +
   geom_hline(aes(yintercept = 0)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
+  coord_equal(ratio=1) +
   ggtitle("Question 8_First 200 Points_0.99B")
