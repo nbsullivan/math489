@@ -156,8 +156,17 @@ q6.A30000 <- matrix.rotate(x0, A, 30000)
 A30000_df <- data.frame(t(q6.A30000))
 A30000_df$ID <- 0:(nrow(A30000_df)-1)   # note indexing by 0 corresponds to power
 
-A30000_df.sub <- subset(A30000_df, abs(X2) < 0.1 )
+A30000_df.sub <- subset(A30000_df, abs(X2) < 0.05 )
 nA <- A30000_df.sub[1:100,3]            # n's corresponding to close points for A
+nA_df <- data.frame(nA)
+nA_df$ID <- 0:(nrow(nA_df)-1)
+
+ggplot(data = nA_df, aes(x = ID, y = nA)) +
+        geom_point() +
+        stat_smooth(formula = y ~ x) + 
+        xlab("n") + 
+        ylab("Power of A") + 
+        ggtitle("Question 6_Powers of A Close to x-axis")
 
 ggplot(data = A30000_df.sub, aes(x = X1, y = X2)) +
         geom_hline(aes(yintercept = 0)) +
@@ -172,8 +181,18 @@ q6.B30000 <- matrix.rotate(x0, B, 30000)
 B30000_df <- data.frame(t(q6.B30000))
 B30000_df$ID <- 0:(nrow(A30000_df)-1)   # note indexing by 0 corresponds to power
 
-B30000_df.sub <- subset(B30000_df, abs(X2) < 0.1 )
+B30000_df.sub <- subset(B30000_df, abs(X2) < 0.05 )
 nB <- B30000_df.sub[1:100,3]            # n's corresponding to close points for B
+nB_df <- data.frame(nA)
+nB_df$ID <- 0:(nrow(nB_df)-1)
+
+ggplot(data = nB_df, aes(x = ID, y = nB)) +
+        geom_point() +
+        stat_smooth(formula = y ~ x) + 
+        xlab("n") + 
+        ylab("Power of B")  +
+        ggtitle("Question 6_Powers of B Close to x-axis")
+
 
 ggplot(data = B30000_df.sub, aes(x = X1, y = X2)) +
         geom_hline(aes(yintercept = 0)) +
@@ -182,6 +201,7 @@ ggplot(data = B30000_df.sub, aes(x = X1, y = X2)) +
         ylim(-1,1) + 
         coord_equal(ratio=1) +
         ggtitle("Question 6_Close Points for B")
+
 
 
 # q7 compute first 100,000 points affected by A, only plot
