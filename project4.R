@@ -6,7 +6,7 @@ library(ggplot2)
 # 2. q5, find a matrix that will produce the ellispe. run function and plot
 # see https://en.wikipedia.org/wiki/Matrix_representation_of_conic_sections
 # 3. q6, figure out what you want to define as "close" to X1 and then plot them
-# 4. do q7, q8
+# 4. do q7, q8q3
 
 
 # this will perform most of the computations needed
@@ -131,7 +131,7 @@ ggplot(data = q2q3_df, aes(x = X1, y = X2, color = transform)) +
 ##################################
 
 M = matrix(c(cos(5*pi/180), sin(5*pi/180), -sin(5*pi/180), cos(5*pi/180)), nrow = 2, ncol = 2)
-V = matrix(c(1, 0, 0, 3), nrow = 2, ncol = 2)
+V = matrix(c(3, 0, 0, 1), nrow = 2, ncol = 2)
 
 x0 = matrix(c(1,0), nrow = 1, ncol = 2)
 
@@ -173,15 +173,44 @@ ggplot(data = A100000_df, aes(x = X1, y = X2)) +
   geom_vline(aes(xintercept = 0)) +
   geom_point() +
   coord_equal(ratio=1) +
-  ggtitle("Question 7_First 100000 Points_Every 314th")
+  ggtitle("Question 7_First 100000 Points")
+
+ggplot(data = A100000_df[seq(1,nrow(A100000_df), by = 314), ], aes(x = X1, y = X2)) +
+        geom_hline(aes(yintercept = 0)) +
+        geom_vline(aes(xintercept = 0)) +
+        geom_point() +
+        coord_equal(ratio=1) +
+        ggtitle("Question 7_Every 314th Point")
+
+ggplot(data = A100000_df[seq(1,nrow(A100000_df), by = 3137), ], aes(x = X1, y = X2)) +
+        geom_hline(aes(yintercept = 0)) +
+        geom_vline(aes(xintercept = 0)) +
+        geom_point() +
+        coord_equal(ratio=1) +
+        ggtitle("Question 7_Every 3137th Point")
 
 
 
+A100000_df_1000 <- A100000_df[seq(1,nrow(A100000_df), by = 1000), ]
+A100000_df_1000$transform <- "1000th"
+
+A100000_df_17000 <- A100000_df[seq(1,nrow(A100000_df), by = 17000), ]
+A100000_df_17000$transform <- "17000th"
+
+A100000_df_2 <- rbind(A100000_df_1000,A100000_df_17000)
+
+ggplot(data = A100000_df_2, aes(x = X1, y = X2, color = factor(transform))) +
+        geom_hline(aes(yintercept = 0)) +
+        geom_vline(aes(xintercept = 0)) +
+        geom_point() +
+        scale_color_manual(values=c("#000000", "#D55E00")) + 
+        coord_equal(ratio=1) +
+        ggtitle("Question 7_Every 1000th Point")
 
 
 # q8 let A+ = 1.01 A solve x(n+1) = A+x(n) and plot first 200
 # points repeat for .99A, 1.01B and .99B
-#A+ = 1.01 A
+# A+ = 1.01 A
 A = matrix(c(.995, .1, -.1, .995), nrow = 2, ncol = 2)
 Aplus=1.01*A
 
