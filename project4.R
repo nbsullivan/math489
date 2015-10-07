@@ -152,6 +152,36 @@ ggplot(data = M100_df, aes(x = X1, y = X2)) +
 # q6 for E values of A compute angle by which A rotates points.
 # if X(0) = (1,0) find values for n in which X(n) is very close
 # the x1 axis. then repeat for B
+q6.A30000 <- matrix.rotate(x0, A, 30000)
+A30000_df <- data.frame(t(q6.A30000))
+A30000_df$ID <- 0:(nrow(A30000_df)-1)   # note indexing by 0 corresponds to power
+
+A30000_df.sub <- subset(A30000_df, abs(X2) < 0.1 )
+nA <- A30000_df.sub[1:100,3]            # n's corresponding to close points for A
+
+ggplot(data = A30000_df.sub, aes(x = X1, y = X2)) +
+        geom_hline(aes(yintercept = 0)) +
+        geom_vline(aes(xintercept = 0)) +
+        geom_point() +
+        ylim(-1,1) + 
+        coord_equal(ratio=1) +
+        ggtitle("Question 6_Close Points for A")
+
+
+q6.B30000 <- matrix.rotate(x0, B, 30000)
+B30000_df <- data.frame(t(q6.B30000))
+B30000_df$ID <- 0:(nrow(A30000_df)-1)   # note indexing by 0 corresponds to power
+
+B30000_df.sub <- subset(B30000_df, abs(X2) < 0.1 )
+nB <- B30000_df.sub[1:100,3]            # n's corresponding to close points for B
+
+ggplot(data = B30000_df.sub, aes(x = X1, y = X2)) +
+        geom_hline(aes(yintercept = 0)) +
+        geom_vline(aes(xintercept = 0)) +
+        geom_point() +
+        ylim(-1,1) + 
+        coord_equal(ratio=1) +
+        ggtitle("Question 6_Close Points for B")
 
 
 # q7 compute first 100,000 points affected by A, only plot
