@@ -131,7 +131,7 @@ ggplot(data = q2q3_df, aes(x = X1, y = X2, color = transform)) +
 ##################################
 
 M = matrix(c(cos(5*pi/180), sin(5*pi/180), -sin(5*pi/180), cos(5*pi/180)), nrow = 2, ncol = 2)
-V = matrix(c(3, 0, 0, 1), nrow = 2, ncol = 2)
+V = matrix(c(1, 0, 0, 4), nrow = 2, ncol = 2)
 
 x0 = matrix(c(1,0), nrow = 1, ncol = 2)
 
