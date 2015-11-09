@@ -16,6 +16,8 @@ ggplot(data = austin, aes(x = Date, y = log(Population))) +
   ggtitle("Austin Log(Population)")
 
 lmfit <- lm(austin$Date ~ austin$Population)
+quadfit <- lm(austin$Date ~ austin$Population + I(austin$Population^2))
+logfit <- lm(log(austin$Date) ~ austin$Population)
 
 ggplot(data = austin, aes(x = Date, y = Population)) +
   geom_point() +
