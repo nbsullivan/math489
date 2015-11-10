@@ -1,9 +1,11 @@
 library(ggplot2)
 
 getwd()
-setwd("C:/Users/nick/Documents/GitHub/Math489")
+setwd("C:/Users/nick/Documents/GitHub/Math489/CurveFitting")
+
 
 austin <- read.csv("ausmodeldata.csv")
+austintest <- read.csv("austestdata.csv")
 
 ggplot(data = austin, aes(x = Date, y = Population)) +
   geom_point() +
@@ -15,9 +17,9 @@ ggplot(data = austin, aes(x = Date, y = log(Population))) +
   geom_line() +
   ggtitle("Austin Log(Population)")
 
-lmfit <- lm(austin$Date ~ austin$Population)
-quadfit <- lm(austin$Date ~ austin$Population + I(austin$Population^2))
-logfit <- lm(log(austin$Date) ~ austin$Population)
+lmfit <- lm(austin$Population ~ austin$Date)
+quadfit <- lm(austin$Population ~ austin$Date + I(austin$Date^2))
+logfit <- lm(log(austin$Population) ~ austin$Population)
 
 ggplot(data = austin, aes(x = Date, y = Population)) +
   geom_point() +
@@ -34,11 +36,14 @@ ggplot(data = austin, aes(x = Date, y = Population)) +
 ggsave("austestquad.jpeg")
 
 
-ggplot(data = austin, aes(x = Date, y = log(Population))) +
+ggplot(data = austin, aes(x = log(Date), y = log(Population))) +
   geom_point() +
   stat_smooth(method = "lm", formula = y~ x) +
   ggtitle("Austin Population With log model")
 
 ggsave("austestlog.jpeg")
 
+summary(lmfit)
+
+predict(lmfit, austintest)
 
