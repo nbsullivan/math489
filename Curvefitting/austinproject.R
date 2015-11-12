@@ -82,7 +82,7 @@ ggplot(data = ausquadtotal, aes(x = Date, y = Population, color = Status)) +
   ggtitle("Austin population with quadardic model")
 ggsave("auscolorquad.jpeg")
 
-ggplot(data = auslogtotal, aes(x = Date, y = log(Population), color = Status)) +
+ggplot(data = auslogtotal, aes(x = Date, y = Population, color = Status)) +
   geom_line() +
   geom_point() +
   ggtitle("Austin population with log model")
