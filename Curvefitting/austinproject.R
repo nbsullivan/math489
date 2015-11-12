@@ -103,7 +103,7 @@ ggplot(data = auspowertotal, aes(x = Date, y = Population, color = Status)) +
   geom_line() +
   geom_point() +
   ggtitle("Austin population with power-law fit")
-ggsave("auscolorlm.jpeg")
+ggsave("auscolorpower.jpeg")
 
 #other plots
 ggplot(data = austin, aes(x = Date, y = Population)) +
@@ -127,3 +127,4 @@ ggplot(data = austin, aes(x = log(Date), y = log(Population))) +
   ggtitle("Austin Population With log model")
 
 ggsave("austestlog.jpeg")
+
