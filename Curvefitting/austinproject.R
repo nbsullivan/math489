@@ -17,9 +17,9 @@ ggplot(data = austin, aes(x = Date, y = log(Population))) +
   geom_line() +
   ggtitle("Austin Log(Population)")
 
-lmfit <- lm(austin$Population ~ austin$Date)
-quadfit <- lm(austin$Population ~ austin$Date + I(austin$Date^2))
-logfit <- lm(log(austin$Population) ~ austin$Population)
+lmfit <- lm(Population ~ Date, data = austin)
+quadfit <- lm(Population ~ Date + I(Date^2), data = austin)
+logfit <- lm(log(Population) ~ Date, data = austin)
 
 ggplot(data = austin, aes(x = Date, y = Population)) +
   geom_point() +
@@ -45,5 +45,8 @@ ggsave("austestlog.jpeg")
 
 summary(lmfit)
 
-predict(lmfit, austintest)
+testyears.df <- data.frame(Date = c(1960,1970,1980,1990,2000,2010))
 
+lmpred <- predict(lmfit, newdata = testyears.df)
+quadpred <- predict(quadfit, newdata = testyears.df)
+logpred <- predict(logfit, newdata = testyears.df)
