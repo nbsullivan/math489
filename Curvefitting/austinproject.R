@@ -139,3 +139,29 @@ ggplot(data = ausexptotal, aes(x = Date, y = Population, color = Status)) +
   geom_point() +
   ggtitle("Austin population with exponential model")
 ggsave("auscolorexp.jpeg")
+
+#Q5
+
+#create new df of austin from 1900 to 2000 and make its population to log population
+
+austintotal <- rbind(austin, austintest)
+
+austin20th <- subset(austintotal, Date <= 2000 & Date >= 1900)
+austin20th$Population <- log(austin20th$Population)
+austin20th$Status <- "Actual"
+
+#create model based on log of population in the 20th Century
+q5fit <- lm(Population ~ Date, data = austin20th)
+
+#make predictions for 2010-2050
+q5pred <- data.frame(Date = c(2010,2020,2030,2040,2050))
+q5pred$Status <- "Predicted"
+q5pred$Population <- predict(q5fit, newdata = q5pred)
+
+q5total <- rbind(q5pred, austin20th)
+
+ggplot(data = q5total, aes(x = Date, y = Population, color = Status)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("Austin population exponential model for 20th centurary data")
+ggsave("q5.jpeg")
