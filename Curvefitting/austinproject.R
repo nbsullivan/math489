@@ -15,11 +15,12 @@ austin$Status <- "Actual"
 ggplot(data = austin, aes(x = Date, y = Population)) +
   geom_point() +
   geom_line() +
-  ggtitle("Austin Population")
-
+  ggtitle("Austin Population 1850-1950")
+ggsave("austin population 1850-1950")
 #plot of data with linear fit
 ggplot(data = austin, aes(x = Date, y = Population)) +
-  geom_point() +
+  geom_point() + 
+  geom_line() +
   stat_smooth(method = "lm", formula = y~x) +
   ggtitle("Austin Population With linear model")
 
@@ -48,6 +49,7 @@ ggsave("auscolorlm.jpeg")
 #plot of model data with quad fit on it
 ggplot(data = austin, aes(x = Date, y = Population)) +
   geom_point() +
+  geom_line() +
   stat_smooth(method = "lm", formula = y~ x + I(x^2)) +
   ggtitle("Austin Population With quadraic model")
 
@@ -87,7 +89,10 @@ austintestln$Population <- log(austintestln$Population)
 ggplot(data = austinln, aes(x = Date, y = Population)) +
   geom_point() +
   geom_line() +
+  ylab("ln(Population)") +
+  xlab("ln(years since founding)") +
   ggtitle("Austin ln(Population) v. ln(years since founding)")
+ggsave("austinlnpopvlndate.jpeg")
 
 #creating model for powerlaw fit
 powerfit <- lm(Population ~ Date, data = austinln)
@@ -105,6 +110,8 @@ auspowertotal <- rbind(auspower, austinln, austintestln)
 ggplot(data = auspowertotal, aes(x = Date, y = Population, color = Status)) +
   geom_line() +
   geom_point() +
+  ylab("ln(Population)") +
+  xlab("ln(years since founding)") +
   ggtitle("Austin log(population) v. log(date since founding) with power-law fit")
 ggsave("auscolorpower.jpeg")
 
@@ -120,7 +127,9 @@ austintestpopln$Population <- log(austintestpopln$Population)
 ggplot(data = austin, aes(x = Date, y = log(Population))) +
   geom_point() +
   geom_line() +
-  ggtitle("Austin Log(Population)")
+  ylab("ln(Population)") +
+  ggtitle("Austin Ln(Population)")
+ggsave("austinlnpopvdate.jpeg")
 
 #bulid model for exponential fit
 expfit <- lm(log(Population) ~ Date, data = austin)
@@ -137,6 +146,7 @@ ausexptotal <- rbind(ausexp, austinpopln, austintestpopln)
 ggplot(data = ausexptotal, aes(x = Date, y = Population, color = Status)) +
   geom_line() +
   geom_point() +
+  ylab("ln(Population)") +
   ggtitle("Austin population with exponential model")
 ggsave("auscolorexp.jpeg")
 
@@ -150,6 +160,12 @@ austin20th <- subset(austintotal, Date <= 2000 & Date >= 1900)
 austin20th$Population <- log(austin20th$Population)
 austin20th$Status <- "Actual"
 
+ggplot(data = austin20th, aes(x = Date, y = Population)) +
+  geom_point() +
+  geom_line() +
+  ggtitle("Austin ln(population) from 1900-2000") 
+ggsave("austinpop19002000lnpop.jpeg")
+  
 #create model based on log of population in the 20th Century
 q5fit <- lm(Population ~ Date, data = austin20th)
 
@@ -163,5 +179,6 @@ q5total <- rbind(q5pred, austin20th)
 ggplot(data = q5total, aes(x = Date, y = Population, color = Status)) +
   geom_line() +
   geom_point() +
+  ylab("ln(Population)") +
   ggtitle("Austin population exponential model for 20th centurary data")
 ggsave("q5.jpeg")
