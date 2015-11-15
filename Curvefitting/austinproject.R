@@ -163,6 +163,7 @@ austin20th$Status <- "Actual"
 ggplot(data = austin20th, aes(x = Date, y = Population)) +
   geom_point() +
   geom_line() +
+  ylab("ln(Population)") +
   ggtitle("Austin ln(population) from 1900-2000") 
 ggsave("austinpop19002000lnpop.jpeg")
   
