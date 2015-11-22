@@ -1,11 +1,12 @@
-syms n t k
+
+syms n t
 % setting up n t and k as symbolics
 
 % setting interval length and that we want the first 20 terms of cn
 % as the the even cns will be zero
 
 L = 1;
-n = 1:20;
+n = 1:200;
 
 %defining the cns
 cn = (2/L)*int(sin((n*pi*t)/L),t,1/4,3/4);
@@ -24,6 +25,10 @@ for i = 1:length(x)
         y(i) = 1;
     end
 end
+
+%trying to get the summation working again
+
+y200 = sum((cn(k) * sin(k*pi*x)/L), k, 1, 200);
 
 y1 = cn(1) * sin((1*pi*x)/L);
 y2 = y1 + cn(3) * sin((3*pi*x)/L);
