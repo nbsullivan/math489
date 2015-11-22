@@ -3,10 +3,10 @@ syms n t
 % adjust the bounds of n to get number of summed modes note even modes are
 % zero so use twice as many...
 L = 1;
-n = 1:600;
-x0 = linspace(0,1);
+n = 1:10;
+x0 = linspace(0,1,1000);
 
-y = linspace(0,1);
+y = linspace(0,1,1000);
 
 %there is probably a better way to do this... forming the squarewave
 % adjust the if condition to reshape the square wave
@@ -29,7 +29,7 @@ sinn = sin((n*pi*x)/L);
 ynf = sum(cn.*sinn);
 
 % subsitute values in for x to get our function values
-ynval  = subs(ynf, x, linspace(0,1));
+ynval  = subs(ynf, x, linspace(0,1,1000));
 
 %plotting.
 hold on
