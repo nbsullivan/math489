@@ -1,5 +1,5 @@
-function fourierseries(Li, modes, resolution, sqrlobound, sqrhighbound)
-syms n t x
+function [ynval, y] = fourierseries(Li, modes, resolution, sqrlobound, sqrhighbound)
+syms t x
 
 % adjust the bounds of n to get number of summed modes note even modes are
 % zero so use twice as many...
@@ -22,7 +22,7 @@ for i = 1:length(x0)
 end
 
 % create the cn vector
-cn = (2/L)*int(sin((n*pi*t)/L),t,1/4,3/4);
+cn = (2/L)*int(sin((n*pi*t)/L),t,sqrlobound,sqrhighbound);
 % creating the sin vector
 sinn = sin((n*pi*x)/L);
 
@@ -32,17 +32,7 @@ ynf = sum(cn.*sinn);
 % subsitute values in for x to get our function values
 ynval  = subs(ynf, x, x0);
 
-%plotting.
-hold on
-plot(x0,ynval)
-plot(x0,y)
-hold off
 
-% %starting to work on the gibbs phenom errors part...
-% 
-% yerror = ynval - y;
-% 
-% plot(x0,yerror)
 
 end
 
