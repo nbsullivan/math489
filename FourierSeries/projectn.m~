@@ -76,9 +76,9 @@ hold off
 
 %q4
 [yq410, yq4] = fourierseries(1, 10, 200, 3/8, 5/8);
-[yq420, yq4a] = fourierseries(1, 20, 200, 3/8, 5/8);
-[yq440, yq4b] = fourierseries(1, 40, 200, 3/8, 5/8);
-[yq480, yq4c] = fourierseries(1, 80, 200, 3/8, 5/8);
+[yq420, yq4a] = fourierseries(1, 10, 200, 3/8, 5/8);
+[yq440, yq4b] = fourierseries(1, 10, 200, 3/8, 5/8);
+[yq480, yq4c] = fourierseries(1, 10, 200, 3/8, 5/8);
 
 figure
 hold on
@@ -94,10 +94,10 @@ hold off
 
 % Errors
 
-y410error = L2norm(yq410 - yq4);
-y420error = L2norm(yq420 - yq4);
-y440error = L2norm(yq440 - yq4);
-y480error = L2norm(yq480 - yq4);
+y410error = L2norm(yq410 - yq);
+y420error = L2norm(yq420 - y);
+y440error = L2norm(yq440 - y);
+y480error = L2norm(yq480 - y);
 
 X = [10 20 40 80].';
 Y = [y410error y420error y440error y480error].';
