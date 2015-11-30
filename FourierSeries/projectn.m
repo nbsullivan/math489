@@ -113,3 +113,9 @@ ylabel('error')
 % legend('10th approximation', '20th approximation', '40th approximation', '80th approximation')
 saveas(gcf, 'q4errorplot.pdf')
 hold off
+
+%taking errors at t = .1 for q4 errors measured as approx - actaul
+y410errort = yq410(20) - yq4(20)
+
+
+
