@@ -16,7 +16,7 @@ xlabel('x')
 ylabel('y')
 legend('Exact Square Wave','One Fourier Mode','Two Fourier Modes','Three Fourier Modes')
 % print('q1plot','-djpeg')
-saveas(gcf, 'q1plot.png');
+saveas(gcf, 'q1plot.pdf');
 hold off
 
 %q2
@@ -31,7 +31,7 @@ xlabel('x')
 ylabel('y')
 legend('Exact Square Wave','Ten Fourier Modes')
 % print('q2plot','-djpeg')
-saveas(gcf, 'q2plot.png');
+saveas(gcf, 'q2plot.pdf');
 hold off
 
 
@@ -71,7 +71,7 @@ xlabel('number of nonzero modes')
 ylabel('error')
 % legend('10th approximation', '20th approximation', '40th approximation', '80th approximation')
 % print('q3plot','-djpeg')
-saveas(gcf, 'q3plot.png')
+saveas(gcf, 'q3plot.pdf')
 hold off
 
 %q4
@@ -89,7 +89,7 @@ xlabel('x')
 ylabel('y')
 legend('Exact Square Wave', 'Tenth Appromimation')
 % print('q4plot','-djpeg')
-saveas(gcf, 'q4plot.png');
+saveas(gcf, 'q4plot.pdf');
 hold off
 
 % Errors
@@ -110,5 +110,5 @@ title('Error in L^2([0, 1]) norms of differences')
 xlabel('number of nonzero modes')
 ylabel('error')
 % legend('10th approximation', '20th approximation', '40th approximation', '80th approximation')
-saveas(gcf, 'q4errorplot.png')
+saveas(gcf, 'q4errorplot.pdf')
 hold off
