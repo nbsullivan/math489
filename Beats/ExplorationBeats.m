@@ -1,6 +1,6 @@
 function ExplorationBeats(e)
 %Numerical solution of coupled differential equations
-%
+
 %Here we are searching for the numerical solution to a system of second degree 
 %differential equations:
 %
